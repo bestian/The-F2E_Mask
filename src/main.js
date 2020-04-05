@@ -15,6 +15,7 @@ Icon.Default.mergeOptions({
 });
 
 Vue.use(VueAxios, axios);
+
 Vue.config.productionTip = false;
 
 Vue.filter('mask', value => (value ? `${value}個` : '已售完'));

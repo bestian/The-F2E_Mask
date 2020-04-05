@@ -12,7 +12,7 @@
       </select>
       <select name="dist" class="dist" v-model="selected.dist"
       @change="passLatLng(false)">
-        <option value="null" selected>-- 請選擇 --</option>
+        <option value="null" selected>-- 請選擇區域 --</option>
         <option
           v-for="(item, index) in dist"
           :key="index"
@@ -21,10 +21,12 @@
           {{ item }}
         </option>
       </select>
+      <input type="radio" name="target" v-model = "target" v-bind:value="'成人'" />成人
+      <input type="radio" name="target" v-model = "target" v-bind:value="'兒童'" />兒童
       <p>
-        有取得口罩數量的藥局有
+        尚能取得{{target}}口罩的藥局有
         <span>
-          {{ list.filter(item => item.mask_child || item.mask_adult).length }}
+          {{ getLength(list) }}
         </span>
         家
       </p>
@@ -59,11 +61,12 @@ export default {
   },
   data() {
     return {
+      target: '成人',
       isOpen: true,
       twCity: [],
       api: [],
       selected: {
-        country: '台北市',
+        country: '新北市',
         dist: null,
       },
     };
@@ -73,14 +76,24 @@ export default {
     this.getCountry();
   },
   methods: {
+    getLength(list) {
+      let ans;
+      if (this.target === '成人') {
+        ans = list.filter(item => item.mask_adult > 10).length;
+      }
+      if (this.target === '兒童') {
+        ans = list.filter(item => item.mask_child > 10).length;
+      }
+      return ans;
+    },
     async getAPI() {
-      const { data } = await this.axios.get('https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?fbclid=IwAR14GsJ3L_SUQSTO1F9ru1pydJrv2t9KJA5xQqqhw5Fode7Y7VGubLGjnBM');
+      const { data } = await this.$http.get('https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?fbclid=IwAR14GsJ3L_SUQSTO1F9ru1pydJrv2t9KJA5xQqqhw5Fode7Y7VGubLGjnBM');
       // console.log('api =>', data);
       this.api = data.features;
     },
     async getCountry() {
       try {
-        const { data } = await this.axios.get('./latlng.json');
+        const { data } = await this.$http.get('./latlng.json');
         this.twCity = data;
         // console.log('tw =>', data);
       } catch (err) {
