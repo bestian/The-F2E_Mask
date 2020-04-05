@@ -2,7 +2,7 @@
 > 使用框架為 Vue，搭配 [vue2-leaflet](https://github.com/vue-leaflet/Vue2Leaflet)。
 
 ## Demo
-https://jedy05097952.github.io/The-F2E_Mask/
+https://bestian.github.io/The-F2E_Mask/
 
 ## 簡介
 此作品主要為 Leaflet 搭配 OpenStreetMap 練習，主要功能有以下：
@@ -29,7 +29,7 @@ https://jedy05097952.github.io/The-F2E_Mask/
 # install dependencies
 $ npm install
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost:8000
 $ npm run serve
 
 # build for production and launch server
