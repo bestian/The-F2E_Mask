@@ -25,7 +25,10 @@
                 成人：{{ item.properties.mask_adult | mask }})
                 <br>
                 兒童：{{ item.properties.mask_child | mask }}</h3>
-            <p><i class="icon_pin"></i>{{item.properties.address}}</p>
+            <p>
+              <a :href="'https://www.google.com/maps/place/' + item.properties.address"><i class="icon_pin"></i>{{item.properties.address}}
+              </a>
+            </p>
             <p><a :href="'tel:' + item.properties.phone">
               <i class="icon_tel"></i>
             {{item.properties.phone}}
