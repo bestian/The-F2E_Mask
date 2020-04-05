@@ -21,9 +21,16 @@
           :lat-lng="[item.geometry.coordinates[1], item.geometry.coordinates[0]]"
         >
           <l-popup>
-            <h3>{{item.properties.name}}</h3>
+            <h3>{{item.properties.name}}(
+                成人：{{ item.properties.mask_adult | mask }})
+                <br>
+                兒童：{{ item.properties.mask_child | mask }}</h3>
             <p><i class="icon_pin"></i>{{item.properties.address}}</p>
-            <p><i class="icon_tel"></i>{{item.properties.phone}}</p>
+            <p><a :href="'tel:' + item.properties.phone">
+              <i class="icon_tel"></i>
+            {{item.properties.phone}}
+              </a>
+            </p>
             <div class="btnWrap">
               <button :class="{'soldout': !item.properties.mask_adult}">
                 成人：{{ item.properties.mask_adult | mask }}
